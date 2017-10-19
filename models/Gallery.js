@@ -1,15 +1,15 @@
 /* jshint esversion:6 */
 module.exports = function(sequelize, DataTypes) {
-  const Picture = sequelize.define('picture', {
+  const Gallery = sequelize.define('gallery', {
     link : DataTypes.STRING, //ImageURL
     description : DataTypes.STRING
   }, {
-    tableName : 'pictures'
+    tableName : 'gallery'
   });
 
-  Picture.associate = function(models) {
-    Picture.belongsTo(models.author);
-  }
+  Gallery.associate = function(models) {
+    Gallery.belongsTo(models.author);
+  };
 
-  return Picture;
-}
+  return Gallery;
+};

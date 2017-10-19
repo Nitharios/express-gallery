@@ -7,8 +7,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Author.associate = function(models) {
-    Author.hasMany(models.picture);
-  }
+    Author.hasMany(models.gallery);
+  };
 
   return Author;
-}
+};

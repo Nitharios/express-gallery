@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080; //change?
 const db = require('./models');
 const Gallery = db.gallery;
+const Author = db.author;
 
 const app = express();
 
@@ -45,7 +46,7 @@ app.get('/gallery/:id/edit', (req, res) => {
   return Gallery.findById(id)
     .then(picture => {
       return res.json(picture);
-    })
+    });
 });
 
 //POST/gallery : create a new gallery photo i
@@ -88,8 +89,7 @@ app.delete('/gallery/:id', (req, res) => {
   const id = req.params.id;
 });
 
-
-
 app.listen(PORT, () => {
+  db.sequelize.sync({ force: true });
   console.log('Server running on ' + PORT);
 });
