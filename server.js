@@ -25,7 +25,10 @@ app.get('/', (req, res) => {
 app.get('/gallery', (req, res) => {
   return Gallery.findAll()
     .then(galleryInformation => {
-      return res.render('/partials/gallery', galleryInformation);
+      // let info = galleryInformation[0].dataValues.link;
+      // console.log('here', galleryInformation);
+      // console.log(info);
+      return res.render('partials/gallery', { galleryInformation });
     });
   })
   .post('/gallery', (req, res) => {
@@ -40,19 +43,21 @@ app.get('/gallery', (req, res) => {
       description : description
     })
       .then(newPicture => {
-        return res.render('/partials/gallery', newPicture);
+        return res.render('partials/gallery', { newPicture });
       });
   });
 
 app.get('/gallery/new', (req, res) => {
-  return res.render('/partials/new');
+  return res.render('partials/new');
 });
 
 app.get('/gallery/:id', (req, res) => {
   const id = req.params.id;
   return Gallery.findById(id) 
     .then(pictureInformation => {
-      return res.render('/partials/gallery_single', pictureInformation);
+      let details = pictureInformation.dataValues;
+
+      return res.render('partials/gallery_single', details);
     });
   })
   .put('/gallery/:id', (req, res) => {
@@ -76,7 +81,7 @@ app.get('/gallery/:id', (req, res) => {
             where : { id : id }
           });
 
-        return res.render("/partials/gallery_single", pictureInformation);
+        return res.render("partials/gallery_single", {pictureInformation });
       });
   })
   .delete('/gallery/:id', (req, res) => {
@@ -86,7 +91,7 @@ app.get('/gallery/:id', (req, res) => {
         Gallery.destroy({ where : {
           id : id
         }});
-        return res.render('/partials/gallery');
+        return res.redirect('/gallery');
       });
   });
 
@@ -94,11 +99,14 @@ app.get('/gallery/:id/edit', (req, res) => {
   const id = req.params.id;
   return Gallery.findById(id)
     .then(pictureInformation => {
-      return res.render('/partials/edit', pictureInformation);
+      let details = pictureInformation.dataValues;
+      console.log(details);
+
+      return res.render('partials/edit', details);
     });
 });
 
 app.listen(PORT, () => {
-  db.sequelize.sync({ force: true });
+  db.sequelize.sync({ force: false });
   console.log('Server running on ' + PORT);
 });
