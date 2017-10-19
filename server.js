@@ -43,7 +43,8 @@ app.get('/gallery', (req, res) => {
       description : description
     })
       .then(newPicture => {
-        return res.render('partials/gallery', { newPicture });
+        console.log('POSTED');
+        return res.redirect('/gallery');
       });
   });
 
@@ -64,7 +65,6 @@ app.get('/gallery/:id', (req, res) => {
     const id = req.params.id;
     const data = req.body; 
     /*{author: string, link: string, description: string}*/
-
     return Gallery.findById(id)
       .then(pictureInformation => {
         let updateObject = {};
@@ -81,7 +81,8 @@ app.get('/gallery/:id', (req, res) => {
             where : { id : id }
           });
 
-        return res.render("partials/gallery_single", {pictureInformation });
+        console.log('UPDATED');
+        return res.redirect(`/gallery/${id}`);
       });
   })
   .delete('/gallery/:id', (req, res) => {
@@ -91,6 +92,7 @@ app.get('/gallery/:id', (req, res) => {
         Gallery.destroy({ where : {
           id : id
         }});
+        console.log('DELETED');
         return res.redirect('/gallery');
       });
   });

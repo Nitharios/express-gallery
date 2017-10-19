@@ -2,9 +2,13 @@
 <h1>Express Gallery</h1>
 
 <div>
+
+{{#each galleryInformation}}
   <div>
     <img src="{{link}}" alt ="">
     <p />{{author}}
     <p />{{description}}
   </div>
+{{/each}}
+
 </div>
