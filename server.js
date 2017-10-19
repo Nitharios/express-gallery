@@ -10,6 +10,9 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
 /*ROUTES*/
+app.get('/', (req, res) => {
+  res.json('Hello World!');
+});
 
 //GET to view a list of gallery photos
 app.get('/gallery', (req, res) => {
@@ -45,6 +48,6 @@ app.delete('/gallery/:id', (req, res) => {
   const id = req.params.id;
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log('Server running on ' + PORT);
 });
