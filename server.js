@@ -14,14 +14,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 /*ROUTES*/
 app.get('/', (req, res) => {
-  return res.render('views/partials/index');
+  return res.json('Hello World!');
 });
 
 //GET to view a list of gallery photos
 app.get('/gallery', (req, res) => {
   return Gallery.findAll()
-    .then(pictures => {
-      return res.json(pictures);
+    .then(galleryInformation => {
+      return res.json(galleryInformation);
     });
 });
 
@@ -29,8 +29,8 @@ app.get('/gallery', (req, res) => {
 app.get('/gallery/:id', (req, res) => {
   const id = req.params.id;
   return Gallery.findById(id) 
-    .then(picture => {
-      return res.json(picture);
+    .then(pictureInformation => {
+      return res.json(pictureInformation);
     });
 });
 
@@ -44,8 +44,8 @@ app.get('/gallery/new', (req, res) => {
 app.get('/gallery/:id/edit', (req, res) => {
   const id = req.params.id;
   return Gallery.findById(id)
-    .then(picture => {
-      return res.json(picture);
+    .then(pictureInformation => {
+      return res.render('partials/edit', { pictureInformation });
     });
 });
 
@@ -55,6 +55,7 @@ app.post('/gallery', (req, res) => {
   const author = req.body.author;
   const link = req.body.link;
   const description = req.body.description;
+
   return Gallery.create({
     author : author,
     link : link,
@@ -71,22 +72,41 @@ app.put('/gallery/:id', (req, res) => {
   const id = req.params.id;
   const data = req.body; 
   //{author: string, link: string, description: string}
-  let updateObject = {};
-  if (data.author) updateObject.author = data.author;
-  if (data.link) updateObject.link = data.link;
-  if (data.description) updateObject.description = data.description; 
 
-  return Gallery.update({
-    
-  })
-    .then( {
+  return Gallery.findById(id)
+    .then(pictureInformation => {
+      let updateObject = {};
 
+      if (data.author) Gallery.update({ 
+        author : data.author }, {
+          where : { id : id }
+        });
+      if (data.link) Gallery.update({ 
+        link : data.link }, {
+          where : { id : id }
+        });
+      if (data.description) Gallery.update({ description : data.description}, {
+          where : { id : id }
+        });
+
+      console.log('Picture edited');
+      return res.json(pictureInformation);
     });
 });
 
 //DELETE/gallery/:id : deletes a single gallery photo ientified by :id
 app.delete('/gallery/:id', (req, res) => {
   const id = req.params.id;
+
+  return Gallery.findById(id)
+    .then((pictureInformation) => {
+      Gallery.destroy({ where : {
+        id : id
+      }});
+
+      console.log('Picture deleted');
+      return res.json(pictureInformation);
+    });
 });
 
 app.listen(PORT, () => {
