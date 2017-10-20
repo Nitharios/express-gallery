@@ -14,6 +14,7 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 const register = require('./routes/register');
 const gallery = require('./routes/gallery');
+const isAuthenticated = require('./scripts/authenticated');
 
 const db = require('./models');
 const Gallery = db.gallery;
@@ -44,11 +45,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /*AUTHENTICATION*/
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { next(); }
-  else { res.redirect('/'); }
-}
-
 passport.serializeUser((user, done) => {
   console.log('serializing');
   return done(null, {
