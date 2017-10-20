@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Gallery.associate = function(models) {
-    Gallery.belongsTo(models.author);
+    Gallery.belongsTo(models.user);
   };
 
   return Gallery;
