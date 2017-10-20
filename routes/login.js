@@ -8,7 +8,7 @@ router.route('/')
     return res.render('partials/login');
   })
   .post(passport.authenticate('local', {
-    successRedirect : '/secret',
+    successRedirect : '/gallery',
     failureRedirect : '/'
   }));
 
