@@ -1,12 +1,12 @@
 <title>Edit An Image</title>
-<h1>Image By : {{author}}</h1>
+<h1>Image By : {{userId}}</h1>
 
 <img src="{{link}}" alt="">
 
 <h3>New Image Information</h3>
 
 <form action="/gallery/{{id}}?_method=PUT" method="post">
-  <p>Author : </p><input type="text" name="author" value="{{author}}">
+  <!-- <p>Author : </p><input type="text" name="author" value="{{userId}}"> -->
   <p>Link : </p><input type="text" name="link" value="{{link}}">
   <p>Description : </p><textarea name="description">{{description}}
   </textarea>

@@ -97,10 +97,10 @@ app.get('/login', (req, res) => {
     failureRedirect : '/'
   }));
 
-app.post('/logout', (req, res) => {
+app.get('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
-  res.redirect('/gallery');
+  /*res.redirect('/gallery');*/
 });
 
 app.get('/secret', isAuthenticated, (req, res) => {
@@ -146,9 +146,9 @@ app.get('/gallery', (req, res) => {
     const description = req.body.description;
 
     return Gallery.create({
-      user : user,
       link : link,
-      description : description
+      description : description,
+      userId : req.user.id
     })
       .then(newPicture => {
         console.log('POSTED');
@@ -156,7 +156,7 @@ app.get('/gallery', (req, res) => {
       });
   });
 
-app.get('/gallery/new', (req, res) => {
+app.get('/gallery/new', isAuthenticated, (req, res) => {
   return res.render('partials/new');
 });
 
@@ -169,22 +169,27 @@ app.get('/gallery/:id', (req, res) => {
       return res.render('partials/gallery_single', details);
     });
   })
-  .put('/gallery/:id', (req, res) => {
+  .put('/gallery/:id', isAuthenticated, (req, res) => {
+    console.log('req.id : ', req.body.id);
     const id = req.params.id;
     const data = req.body; 
     /*{user: string, link: string, description: string}*/
     return Gallery.findById(id)
       .then(pictureInformation => {
+        console.log('Gallery ID: ', pictureInformation.usersId);
         let updateObject = {};
         //how to handle user-gallery association in model?
-        if (data.user) Gallery.update({ 
+        /*if (data.user) Gallery.update({ 
           user : data.user }, {
             where : { id : id }
-          });
-        if (data.link) Gallery.update({ 
+          });*/
+        if (data.link) {
+          console.log('Here: ', data.link);
+          Gallery.update({ 
           link : data.link }, {
             where : { id : id }
           });
+        }//end if
         if (data.description) Gallery.update({ description : data.description}, {
             where : { id : id }
           });
@@ -193,7 +198,7 @@ app.get('/gallery/:id', (req, res) => {
         return res.redirect(`/gallery/${id}`);
       });
   })
-  .delete('/gallery/:id', (req, res) => {
+  .delete('/gallery/:id', isAuthenticated, (req, res) => {
     const id = req.params.id;
     return Gallery.findById(id)
       .then((pictureInformation) => {
@@ -217,6 +222,6 @@ app.get('/gallery/:id/edit', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  db.sequelize.sync({ force: true });
+  db.sequelize.sync({ force: false });
   console.log('Server running on ' + PORT);
 });
