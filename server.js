@@ -139,7 +139,7 @@ app.get('/gallery', (req, res) => {
       return res.render('partials/gallery', { galleryInformation });
     });
   })
-  .post('/gallery', (req, res) => {
+  .post('/gallery', isAuthenticated, (req, res) => {
     /*{user: string, link: string, description: string}*/
     const user = req.body.user;
     const link = req.body.link;
@@ -164,6 +164,7 @@ app.get('/gallery/:id', (req, res) => {
   const id = req.params.id;
   return Gallery.findById(id) 
     .then(pictureInformation => {
+      console.log('HERE', pictureInformation);
       let details = pictureInformation.dataValues;
 
       return res.render('partials/gallery_single', details);
@@ -176,26 +177,18 @@ app.get('/gallery/:id', (req, res) => {
     /*{user: string, link: string, description: string}*/
     return Gallery.findById(id)
       .then(pictureInformation => {
-        console.log('Gallery ID: ', pictureInformation.usersId);
-        let updateObject = {};
-        //how to handle user-gallery association in model?
-        /*if (data.user) Gallery.update({ 
-          user : data.user }, {
-            where : { id : id }
-          });*/
-        if (data.link) {
-          console.log('Here: ', data.link);
-          Gallery.update({ 
-          link : data.link }, {
-            where : { id : id }
+        // pictureInformation returns entire object
+        return Gallery.update({ 
+          link : data.link, 
+          description : data.description 
+        }, { 
+          
+          where : { id: id } 
+          })
+          .then(data => {
+            // data will return id of image
+            return res.redirect('/gallery');
           });
-        }//end if
-        if (data.description) Gallery.update({ description : data.description}, {
-            where : { id : id }
-          });
-
-        console.log('UPDATED');
-        return res.redirect(`/gallery/${id}`);
       });
   })
   .delete('/gallery/:id', isAuthenticated, (req, res) => {
@@ -210,14 +203,21 @@ app.get('/gallery/:id', (req, res) => {
       });
   });
 
-app.get('/gallery/:id/edit', (req, res) => {
+app.get('/gallery/:id/edit', isAuthenticated, (req, res) => {
   const id = req.params.id;
+
   return Gallery.findById(id)
     .then(pictureInformation => {
       let details = pictureInformation.dataValues;
-      console.log(details);
 
-      return res.render('partials/edit', details);
+      if (req.user.id === pictureInformation.id) {
+
+        console.log('details', details);
+        return res.render('partials/edit', details);
+      
+      } else {
+        return res.redirect('gallery');
+      }      
     });
 });
 
