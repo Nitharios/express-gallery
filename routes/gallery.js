@@ -27,8 +27,15 @@ router.route('/')
   .post(isAuthenticated, (req, res) => {
     /*{user: string, link: string, description: string}*/
     const user = req.body.user;
-    const link = req.body.link;
     const description = req.body.description;
+    let pattern = new RegExp('^(http|https)://');
+    let link;
+
+    if (pattern.test(req.body.link)) {
+      link = req.body.link;
+    } else {
+      return res.redirect('/gallery');
+    }
 
     return Gallery.create({
       link : link,
@@ -64,6 +71,16 @@ router.route('/:id')
     const id = req.params.id;
     const data = req.body; 
     /*{user: string, link: string, description: string}*/
+
+    let pattern = new RegExp('^(http|https)://');
+    let link;
+
+    if (pattern.test(data.link)) {
+      link = data.link;
+    } else {
+      return res.redirect('/gallery');
+    }
+
     return Gallery.findById(id)
       .then(pictureInformation => {
         // pictureInformation returns entire object
@@ -87,12 +104,14 @@ router.route('/:id')
       .then((pictureInformation) => {
         Gallery.destroy({ where : {
           id : id
-        }});
-
-        console.log('DELETED');
-        return res.redirect('/gallery');
+        }})
+        .then(() => {
+          console.log('DELETED');
+          return res.redirect('/gallery');
+        });
       });
-  });
+
+  });//end delete
 
 router.route('/:id/edit')
   .get(isAuthenticated, (req, res) => {
@@ -102,13 +121,13 @@ router.route('/:id/edit')
       .then(pictureInformation => {
         let details = pictureInformation.dataValues;
 
-        if (req.user.id === pictureInformation.id) {
+        if (req.user.id === pictureInformation.userId) {
 
           console.log('details', details);
           return res.render('partials/edit', details);
         
         } else {
-          return res.redirect('gallery');
+          return res.redirect('/gallery');
         }      
       });
   });
