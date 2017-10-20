@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   const Gallery = sequelize.define('gallery', {
     link : DataTypes.STRING, //ImageURL
-    description : DataTypes.STRING
+    description : DataTypes.TEXT
   }, {
     tableName : 'gallery'
   });
