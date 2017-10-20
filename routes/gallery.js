@@ -6,6 +6,7 @@ const router = express.Router();
 
 const db = require('../models');
 const Gallery = db.gallery;
+const User = db.user; 
 
 const saltRounds = 12;
 
@@ -17,10 +18,12 @@ function isAuthenticated(req, res, next) {
 
 router.route('/')
   .get((req, res) => {
-    return Gallery.findAll()
+    return Gallery.findAll({
+      include : [{
+        model : User
+      }]
+    })
       .then(galleryInformation => {
-        console.log('in gallery root');
-
         return res.render('partials/gallery', { galleryInformation });
     });
   })
@@ -56,11 +59,22 @@ router.route('/new')
 router.route('/:id')
   .get((req, res) => {
   const id = req.params.id;
+  console.log(id);
+  /*return Gallery.findAll({
+      include : [{
+        model : User
+      }]
+    })*/
 
-  return Gallery.findById(id) 
+  return Gallery.findById(id, {
+    include : [{
+      model : User
+    }]
+  })
     .then(pictureInformation => {
       let details = pictureInformation.dataValues;
-      console.log('details', details);
+      let userName = details.user.dataValues.username;
+      console.log('Details : ', userName);
 
       return res.render('partials/gallery_single', details);
     });
