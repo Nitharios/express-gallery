@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
 </head>
 <body>
+
+  {{#unless home}}
+    <form action="" method="get">
+      <input type="submit" formaction="javascript:history.go(-1)" value="Back">
+      <input type="submit" formaction="/" value="Home">
+    </form>
+  {{/unless}}
+
+  <p/>
   {{{body}}}
 </body>
 </html>
