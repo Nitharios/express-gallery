@@ -9,11 +9,16 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
-const saltRounds = 12;
+
+const login = require('./routes/login');
+const logout = require('./routes/logout');
+const register = require('./routes/register');
+const gallery = require('./routes/gallery');
 
 const db = require('./models');
 const Gallery = db.gallery;
 const User = db.user;
+const saltRounds = 12;
 
 const app = express();
 
@@ -89,19 +94,10 @@ app.get('/', (req, res) => {
   return res.render('index', { home : true });
 });
 
-app.get('/login', (req, res) => {
-  return res.render('partials/login');
-})
-  .post('/login', passport.authenticate('local', {
-    successRedirect : '/secret',
-    failureRedirect : '/'
-  }));
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.sendStatus(200);
-  /*res.redirect('/gallery');*/
-});
+app.use('/login', login);
+app.use('/logout', logout);
+app.use('/register', register);
+app.use('/gallery', gallery);
 
 app.get('/secret', isAuthenticated, (req, res) => {
   console.log('req.user: ', req.user);
@@ -109,116 +105,6 @@ app.get('/secret', isAuthenticated, (req, res) => {
   console.log('req.username: ', req.user.username);
   console.log('req.user.password: ', req.user.password);
   res.send('you found the secret!');
-});
-
-app.get('/register', (req, res) => {
-  return res.render('partials/register');
-})
-  .post('/register', (req, res) => {
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-      bcrypt.hash(req.body.password, salt, function(err, hash) {
-        db.user.create({
-          username : req.body.username,
-          password : hash
-        })
-        .then(user => {
-          console.log(user);
-          res.redirect('/');
-        })
-        .catch(err => { return res.send('stupid username'); });
-      });
-    });
-  });
-
-app.get('/gallery', (req, res) => {
-  return Gallery.findAll()
-    .then(galleryInformation => {
-      // let info = galleryInformation[0].dataValues.link;
-      // console.log('here', galleryInformation);
-      // console.log(info);
-      return res.render('partials/gallery', { galleryInformation });
-    });
-  })
-  .post('/gallery', isAuthenticated, (req, res) => {
-    /*{user: string, link: string, description: string}*/
-    const user = req.body.user;
-    const link = req.body.link;
-    const description = req.body.description;
-
-    return Gallery.create({
-      link : link,
-      description : description,
-      userId : req.user.id
-    })
-      .then(newPicture => {
-        console.log('POSTED');
-        return res.redirect('/gallery');
-      });
-  });
-
-app.get('/gallery/new', isAuthenticated, (req, res) => {
-  return res.render('partials/new');
-});
-
-app.get('/gallery/:id', (req, res) => {
-  const id = req.params.id;
-  return Gallery.findById(id) 
-    .then(pictureInformation => {
-      console.log('HERE', pictureInformation);
-      let details = pictureInformation.dataValues;
-
-      return res.render('partials/gallery_single', details);
-    });
-  })
-  .put('/gallery/:id', isAuthenticated, (req, res) => {
-    console.log('req.id : ', req.body.id);
-    const id = req.params.id;
-    const data = req.body; 
-    /*{user: string, link: string, description: string}*/
-    return Gallery.findById(id)
-      .then(pictureInformation => {
-        // pictureInformation returns entire object
-        return Gallery.update({ 
-          link : data.link, 
-          description : data.description 
-        }, { 
-          
-          where : { id: id } 
-          })
-          .then(data => {
-            // data will return id of image
-            return res.redirect('/gallery');
-          });
-      });
-  })
-  .delete('/gallery/:id', isAuthenticated, (req, res) => {
-    const id = req.params.id;
-    return Gallery.findById(id)
-      .then((pictureInformation) => {
-        Gallery.destroy({ where : {
-          id : id
-        }});
-        console.log('DELETED');
-        return res.redirect('/gallery');
-      });
-  });
-
-app.get('/gallery/:id/edit', isAuthenticated, (req, res) => {
-  const id = req.params.id;
-
-  return Gallery.findById(id)
-    .then(pictureInformation => {
-      let details = pictureInformation.dataValues;
-
-      if (req.user.id === pictureInformation.id) {
-
-        console.log('details', details);
-        return res.render('partials/edit', details);
-      
-      } else {
-        return res.redirect('gallery');
-      }      
-    });
 });
 
 app.listen(PORT, () => {
