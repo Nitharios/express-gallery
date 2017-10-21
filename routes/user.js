@@ -19,7 +19,11 @@ router.route('/login')
   .post('/login', passport.authenticate('local', {
     successRedirect : '/secret',
     failureRedirect : '/'
-  }));
+  }), () => {
+    console.log('test');
+    }
+
+  );//end post
 
 router.route('/logout')
   .post((req, res) => {
@@ -42,17 +46,20 @@ router.route('/register')
     return res.render('partials/register');
   })
   .post('/register', (req, res) => {
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-      bcrypt.hash(req.body.password, salt, function(err, hash) {
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
         db.user.create({
           username : req.body.username,
           password : hash
         })
         .then(user => {
           console.log(user);
-          res.redirect('/');
+          return res.redirect('/');
         })
-        .catch(err => { return res.send('stupid username'); });
+        .catch(err => { 
+          console.log('Error : ', err);
+          return res.render('partials/login_error');
+        });
       });
     });
   });
