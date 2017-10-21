@@ -126,14 +126,21 @@ div {
   flex-flow: row wrap;
   justify-content: space-between;
   
+  margin: 10px;
+  width: 100%;
+
+  @media (max-width: $med-size) {
+    justify-content: center;
+  }
+
   #details {
     margin: 0;
-
     width: 65%;
 
-    // @media (max-width: $sm-med) {
-    //   justify-content: center;
-    // }
+    @media (max-width: $med-size) {
+      text-align: center;
+      width: 80%;
+    }
 
     img {
       // image will not stretch/shrink
@@ -142,6 +149,11 @@ div {
       max-height: 400px;
 
       @media (max-width: $med-size) {
+        width: 500px;
+        height: 300px;
+      } 
+
+      @media (max-width: $sm-med) {
         width: 300px;
         height: 200px;
       } 
@@ -150,13 +162,22 @@ div {
 
   #other-images {
     margin: 0;
-
     width: 25%;
+    text-align: center;
 
-      img {
-        object-fit: cover;
-        width: 100%;
+    @media (max-width: $med-size) {
+      width: 100%;
+    }
+
+    img {
+      object-fit: cover;
+      width: 100%;
+
+      @media (max-width: $med-size) {
+        width: 300px;
+        height: 200px;
       }
+    }
   }
 }
 
@@ -180,6 +201,12 @@ hr {
 #divider {
   visibility: hidden;
   width: 100%;
+}
+
+// spacers
+.spacer {
+  width: 100%;
+  height: 80px;
 }
 
 /* For New Image Form */
