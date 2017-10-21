@@ -6,20 +6,22 @@ const db = require('../models');
 
 /*AUTHENTICATION*/
 passport.serializeUser((user, done) => {
-  console.log('serializing');
+  console.log('serializing', user);
   return done(null, {
     id : user.id,
-    username : user.username
+    username : user.username,
+    role : user.role
   });
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('deserializing');
+  console.log('deserializing', user);
   db.user.findOne({ where : { id : user.id} })
     .then(user => {
       return done(null, {
         id : user.id,
-        username : user.username
+        username : user.username,
+        role : user.role
       });
     });
 });

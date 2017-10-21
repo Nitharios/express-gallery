@@ -15,6 +15,7 @@ router.route('/')
       }]
     })
       .then(galleryInformation => {
+        console.log('ROLE', req);
         return res.render('partials/gallery', { galleryInformation });
     });
   })
