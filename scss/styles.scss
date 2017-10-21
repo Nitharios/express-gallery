@@ -20,7 +20,7 @@ h1 {
 }
 
 div {
-  border: 1px solid black;
+  // border: 1px solid black;
 }
 
 img {
@@ -36,7 +36,7 @@ img {
 #page-header {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
 
   #brand {
@@ -49,6 +49,7 @@ img {
 
   #brand-description {
     max-width: 350px;
+    margin: 1px solid black;
 
     @media (max-width: $sm-med) {
       display: none;
@@ -77,7 +78,6 @@ img {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  // align-content: space-around;
 
   .information {
     margin: 7px;

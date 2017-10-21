@@ -5,9 +5,6 @@ body {
 h1 {
   color: #536878; }
 
-div {
-  border: 1px solid black; }
-
 img {
   max-width: 300px; }
 
@@ -18,7 +15,7 @@ img {
 #page-header {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%; }
   #page-header #brand {
     max-width: 600px;
@@ -27,7 +24,8 @@ img {
     text-align: left;
     align-self: flex-start; }
   #page-header #brand-description {
-    max-width: 350px; }
+    max-width: 350px;
+    margin: 1px solid black; }
     @media (max-width: 600px) {
       #page-header #brand-description {
         display: none; } }
