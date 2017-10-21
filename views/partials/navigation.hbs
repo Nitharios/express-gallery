@@ -16,6 +16,12 @@
     {{!-- new image --}}
   <div class="nav-content">
     <div class="nav">
+      {{#if home}}
+      <a href="/register">Register</a>
+      {{/if}}
+    </div>
+    
+    <div class="nav">
       {{#unless home}}
       <a href="/logout">Logout</a>
       {{/unless}}

@@ -108,6 +108,8 @@ div {
   max-width: $med-size;
   margin: 0 auto;
 
+  padding-top: 50px;
+
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -115,14 +117,13 @@ div {
   .information {
     margin: 7px;
 
-  img {
-    width: 300px;
-    height: 200px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
+    img {
+      width: 300px;
+      height: 200px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 }
 
