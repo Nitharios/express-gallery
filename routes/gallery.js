@@ -116,7 +116,7 @@ router.route('/:id/edit')
       .then(pictureInformation => {
         let details = pictureInformation.dataValues;
 
-        if (req.user.id === pictureInformation.userId) {
+        if (req.user.id === pictureInformation.userId || req.user.role === 'admin') {
           return res.render('partials/edit', details);
         
         } else {
