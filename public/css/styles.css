@@ -6,9 +6,6 @@ body {
 h1 {
   color: #536878; }
 
-img {
-  max-width: 300px; }
-
 .header {
   margin: 10px;
   margin-bottom: 30px; }
@@ -27,7 +24,7 @@ img {
   flex-flow: row nowrap;
   justify-content: space-around;
   width: 100%;
-  margin-top: 30px; }
+  margin-top: 50px; }
   #page-header #brand {
     max-width: 600px;
     font-size: 25px;
@@ -64,6 +61,12 @@ img {
   justify-content: center; }
   #content .information {
     margin: 7px; }
+    #content .information img {
+      width: 300px;
+      height: 200px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover; }
 
 #main-divider {
   width: 90%;
