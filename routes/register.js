@@ -16,23 +16,16 @@ router.route('/')
     bcrypt.genSalt(saltRounds, (err, salt) => {
       bcrypt.hash(req.body.password, salt, (err, hash) => {
         let username = req.body.username;
-        console.log(username);
-
-
         db.user.create({
           username : username,
           password : hash
         })
         .then(user => {
-          console.log(user);
           return res.redirect('/');
         })
         .catch(err => { 
-          console.log('Error : ', err);
-          return res.render('partials/errors/user_already_exists');
+          return res.render('partials/loginReg/user_already_exists');
         });
-
-
       });
     });
   });

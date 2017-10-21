@@ -5,11 +5,12 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
+    console.log('login page');
     return res.render('partials/login');
   })
   .post(passport.authenticate('local', {
     successRedirect : '/gallery',
-    failureRedirect : '/'
+    failureRedirect : '/error'
   }));
 
 module.exports = router;

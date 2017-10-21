@@ -14,6 +14,7 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 const register = require('./routes/register');
 const gallery = require('./routes/gallery');
+const error = require('./routes/error');
 const isAuthenticated = require('./scripts/authenticated');
 
 const db = require('./models');
@@ -94,6 +95,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
 app.use('/gallery', gallery);
+app.use('/error', error);
 
 app.get('/secret', isAuthenticated, (req, res) => {
   console.log('req.user: ', req.user);
