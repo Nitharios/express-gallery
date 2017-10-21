@@ -1,19 +1,36 @@
 body {
+  font-family: sans-serif;
   color: #536878; }
 
 h1 {
   color: #536878; }
 
+div {
+  border: 1px solid black; }
+
 img {
   max-width: 300px; }
+
+.header {
+  margin: 10px;
+  margin-bottom: 30px; }
 
 #page-header {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center; }
-  @media (max-width: 960px) {
-    #page-header #brand-description {
-      display: none; } }
+  justify-content: center;
+  width: 100%; }
+  #page-header #brand {
+    max-width: 600px;
+    font-size: 25px;
+    line-height: 23px;
+    text-align: left;
+    align-self: flex-start; }
+  #page-header #brand-description {
+    max-width: 350px; }
+    @media (max-width: 600px) {
+      #page-header #brand-description {
+        display: none; } }
 
 #first-image img {
   max-width: 100%; }
@@ -32,11 +49,13 @@ img {
   flex-flow: row wrap;
   justify-content: center; }
   #content .information {
-    margin: 10px; }
+    margin: 7px; }
 
 #main-divider {
-  width: 75%;
-  color: #B2BEB5; }
+  width: 90%;
+  color: #BFC1C2;
+  margin-top: 15px;
+  margin-bottom: 10px; }
   @media (min-width: 960px) {
     #main-divider {
       width: 100%; } }

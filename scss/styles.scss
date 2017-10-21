@@ -1,7 +1,7 @@
 // theme colors
 $bg-color: #FFFFFF;
 $primary-color: #536878;
-$secondary-color: #B2BEB5;
+$secondary-color: #BFC1C2;
 $accent-color: #000000;
 
 //breakpoints
@@ -10,8 +10,8 @@ $sm-med: 600px;
 $med-size: 960px;
 $lg-size: 1080px;
 
-
 body {
+  font-family: sans-serif;
   color: $primary-color;
 }
 
@@ -20,7 +20,7 @@ h1 {
 }
 
 div {
-  // border: 1px solid black;
+  border: 1px solid black;
 }
 
 img {
@@ -28,20 +28,35 @@ img {
   // max-height: 200px;
 }
 
+.header {
+  margin: 10px;
+  margin-bottom: 30px;
+}
+
 #page-header {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  width: 100%;
+
+  #brand {
+    max-width: $sm-med;
+    font-size: 25px;
+    line-height: 23px;
+    text-align: left;
+    align-self: flex-start;
+  }
 
   #brand-description {
-    @media (max-width: $med-size) {
+    max-width: 350px;
+
+    @media (max-width: $sm-med) {
       display: none;
     }
   }
 }
 
 #first-image {
-
   img {
     max-width: 100%;
   }
@@ -65,13 +80,20 @@ img {
   // align-content: space-around;
 
   .information {
-    margin: 10px;
+    margin: 7px;
   }
 }
 
+hr {
+  // border-style: solid;
+}
+
 #main-divider {
-  width: 75%;
+  width: 90%;
   color: $secondary-color;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  // border: none;
 
   @media (min-width: $med-size) {
     width: 100%;
