@@ -4,17 +4,12 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const router = express.Router();
 
+const isAuthenticated = require('../scripts/authenticated');
 const db = require('../models');
 const Gallery = db.gallery;
 const User = db.user; 
 
 const saltRounds = 12;
-
-/*AUTHENTICATION*/
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { next(); }
-  else { res.redirect('/'); }
-}
 
 router.route('/')
   .get((req, res) => {
@@ -24,7 +19,6 @@ router.route('/')
       }]
     })
       .then(galleryInformation => {
-        console.log('t');
         return res.render('partials/gallery', { galleryInformation });
     });
   })
@@ -32,12 +26,13 @@ router.route('/')
     /*{user: string, link: string, description: string}*/
     const user = req.body.user;
     const description = req.body.description;
-    let pattern = new RegExp('^(http|https)://');
+    const pattern = new RegExp('^(http|https)://');
     let link;
 
     if (pattern.test(req.body.link)) {
       link = req.body.link;
     } else {
+      // NEED to notify user that an error occurred and that they were unable to add a new image to the gallery
       return res.redirect('/gallery');
     }
 
@@ -47,8 +42,8 @@ router.route('/')
       userId : req.user.id
     })
       .then(newPicture => {
-        console.log('POSTED');
-        return res.redirect('/gallery');
+        console.log('POSTED', newPicture);
+        return res.redirect(`/gallery/${newPicture.dataValues.id}`);
       });
   });
 
@@ -60,12 +55,6 @@ router.route('/new')
 router.route('/:id')
   .get((req, res) => {
   const id = req.params.id;
-  console.log(id);
-  /*return Gallery.findAll({
-      include : [{
-        model : User
-      }]
-    })*/
 
   return Gallery.findById(id, {
     include : [{
@@ -75,17 +64,13 @@ router.route('/:id')
     .then(pictureInformation => {
       let details = pictureInformation.dataValues;
       let userName = details.user.dataValues.username;
-      console.log('Details : ', userName);
 
       return res.render('partials/gallery_single', details);
     });
   })
   .put(isAuthenticated, (req, res) => {
-    console.log('req.id : ', req.body.id);
-
     const id = req.params.id;
     const data = req.body; 
-    /*{user: string, link: string, description: string}*/
 
     let pattern = new RegExp('^(http|https)://');
     let link;
@@ -138,7 +123,6 @@ router.route('/:id/edit')
 
         if (req.user.id === pictureInformation.userId) {
 
-          console.log('details', details);
           return res.render('partials/edit', details);
         
         } else {

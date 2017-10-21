@@ -28,15 +28,6 @@ router.route('/logout')
     res.redirect('/');
   });
 
-router.route('/secret')
-  .get(isAuthenticated, (req, res) => {
-    console.log('req.user: ', req.user);
-    console.log('req.user.id: ', req.user.id);
-    console.log('req.username: ', req.user.username);
-    console.log('req.user.password: ', req.user.password);
-    res.send('you found the secret!');
-  });
-
 router.route('/register')
   .get((req, res) => {
     return res.render('partials/register');
