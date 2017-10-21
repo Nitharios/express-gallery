@@ -4,6 +4,13 @@ $primary-color: #536878;
 $secondary-color: #B2BEB5;
 $accent-color: #000000;
 
+//breakpoints
+$sm-size: 400px;
+$sm-med: 600px;
+$med-size: 960px;
+$lg-size: 1080px;
+
+
 body {
   color: $primary-color;
 }
@@ -18,7 +25,7 @@ div {
 
 img {
   max-width: 300px;
-  max-height: 200px;
+  // max-height: 200px;
 }
 
 #page-header {
@@ -27,14 +34,29 @@ img {
   justify-content: center;
 
   #brand-description {
-    @media (max-width: 800px) {
+    @media (max-width: $med-size) {
       display: none;
     }
   }
 }
 
+#first-image {
+
+  img {
+    max-width: 100%;
+  }
+}
+
+#wrapper {
+  max-width: $med-size;
+  display: flex;
+  margin: 0 auto;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
 #content {
-  max-width: 960px;
+  max-width: $med-size;
   margin: 0 auto;
 
   display: flex;
@@ -43,11 +65,20 @@ img {
   // align-content: space-around;
 
   .information {
-    margin: 15px;
+    margin: 10px;
   }
 }
 
 #main-divider {
   width: 75%;
   color: $secondary-color;
+
+  @media (min-width: $med-size) {
+    width: 100%;
+  }
+}
+
+#divider {
+  visibility: hidden;
+  width: 100%;
 }

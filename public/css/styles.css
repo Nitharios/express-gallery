@@ -5,16 +5,25 @@ h1 {
   color: #536878; }
 
 img {
-  max-width: 300px;
-  max-height: 200px; }
+  max-width: 300px; }
 
 #page-header {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center; }
-  @media (max-width: 800px) {
+  @media (max-width: 960px) {
     #page-header #brand-description {
       display: none; } }
+
+#first-image img {
+  max-width: 100%; }
+
+#wrapper {
+  max-width: 960px;
+  display: flex;
+  margin: 0 auto;
+  flex-flow: row wrap;
+  justify-content: center; }
 
 #content {
   max-width: 960px;
@@ -23,8 +32,15 @@ img {
   flex-flow: row wrap;
   justify-content: center; }
   #content .information {
-    margin: 15px; }
+    margin: 10px; }
 
 #main-divider {
   width: 75%;
   color: #B2BEB5; }
+  @media (min-width: 960px) {
+    #main-divider {
+      width: 100%; } }
+
+#divider {
+  visibility: hidden;
+  width: 100%; }

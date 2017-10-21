@@ -6,7 +6,7 @@
 </head>
 <body>
 
-  <div id="wrapper">
+  <div id="nav">
     {{#unless home}}
 
       <form action="" method="get">
@@ -19,13 +19,19 @@
         <input type="submit" value="New Image">
       </form>
 
-      {{> masthead}}
+    {{/unless}}       
+  </div>
 
-    {{/unless}}    
+  <div id="wrapper">
 
-    <div id="content">
-      {{{body}}}
-    </div>
+    {{> header}}
+    <hr id="divider">
+    {{> masthead}}
+
+  </div>
+
+  <div id="content">
+    {{{body}}}
   </div>
 
 </body>
