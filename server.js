@@ -5,7 +5,6 @@ const handlebars = require('express-handlebars');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const session = require('express-session');
-// const LocalStrategy = require('passport-local').Strategy;
 const redis = require('connect-redis')(session); 
 
 const authenticatePassport = require('./scripts/auth-pass');
@@ -14,11 +13,11 @@ const logout = require('./routes/logout');
 const register = require('./routes/register');
 const gallery = require('./routes/gallery');
 const error = require('./routes/error');
-const isAuthenticated = require('./scripts/authenticated');
+// const isAuthenticated = require('./scripts/authenticated');
 const db = require('./models');
 
 const PORT = process.env.PORT || 8080; //change?
-const saltRounds = 12;
+// const saltRounds = 12;
 
 const app = express();
 
@@ -56,5 +55,5 @@ app.use('/error', error);
 
 app.listen(PORT, () => {
   db.sequelize.sync({ force: false });
-  console.log('Server running on ' + PORT);
+  console.log(`Server running on ${PORT}`);
 });
