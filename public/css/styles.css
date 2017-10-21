@@ -1,10 +1,9 @@
 body {
   font-family: sans-serif;
-  color: #536878;
-  background-color: green; }
+  color: #536878; }
 
 h1 {
-  color: black; }
+  color: #536878; }
 
 img {
   max-width: 300px; }
@@ -64,18 +63,3 @@ img {
   width: 100%; }
 
 /* For New Image Form */
-.topHeader {
-  color: yellow;
-  border: 1px solid black;
-  position: absolute;
-  left: 10px; }
-
-#newform {
-  border: 1px solid black;
-  position: absolute;
-  left: 10px;
-  top: 150px; }
-  #newform p {
-    color: yellow; }
-  #newform input {
-    color: magenta; }
