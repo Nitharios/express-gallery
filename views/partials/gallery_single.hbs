@@ -1,9 +1,20 @@
 <title>View Image</title>
-<h1>Image By : {{user.username}}</h1>
 {{!-- <h1>Express Gallery</h1> --}}
 
-<div>
-  <img src="{{link}}" alt="">
-  <br>
-  <p>{{description}}</p>
+<div id="single-wrapper">
+  <div id="details">
+    <h1>Image By : {{user.username}}</h1>
+    <img src="{{link}}" alt="">
+    <br>
+    <p>{{description}}</p>
+  </div>
+
+  <div id="other-images">
+    <p />
+    <img src="{{link}}" alt=""><p />
+    <img src="{{link}}" alt=""><p />
+    <img src="{{link}}" alt=""><p />
+    <img src="{{link}}" alt=""><p />
+    <img src="{{link}}" alt=""><p />
+  </div>
 </div>

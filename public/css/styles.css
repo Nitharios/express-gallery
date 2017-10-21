@@ -7,10 +7,6 @@ body {
 h1 {
   color: #536878; }
 
-.header {
-  margin: 10px;
-  margin-bottom: 30px; }
-
 #navbar {
   display: flex;
   flex-flow: row nowrap;
@@ -29,6 +25,10 @@ h1 {
       #navbar .nav-content .nav a {
         color: #536878;
         text-decoration: none; }
+
+.header {
+  margin: 10px;
+  margin-bottom: 30px; }
 
 #page-header {
   display: flex;
@@ -49,20 +49,13 @@ h1 {
       #page-header #brand-description {
         display: none; } }
 
-#first-image {
+#masthead {
   margin: 10px; }
   @media (min-width: 960px) {
-    #first-image {
+    #masthead {
       margin: 0px; } }
-  #first-image img {
+  #masthead img {
     max-width: 100%; }
-
-#wrapper {
-  max-width: 960px;
-  display: flex;
-  margin: 0 auto;
-  flex-flow: row wrap;
-  justify-content: center; }
 
 #content {
   max-width: 960px;
@@ -74,11 +67,31 @@ h1 {
   #content .information {
     margin: 7px; }
     #content .information img {
+      object-fit: cover;
       width: 300px;
-      height: 200px;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: cover; }
+      height: 200px; }
+
+#single-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between; }
+  #single-wrapper #details {
+    margin: 0;
+    width: 65%; }
+    #single-wrapper #details img {
+      object-fit: cover;
+      max-width: 600px;
+      max-height: 400px; }
+      @media (max-width: 960px) {
+        #single-wrapper #details img {
+          width: 300px;
+          height: 200px; } }
+  #single-wrapper #other-images {
+    margin: 0;
+    width: 25%; }
+    #single-wrapper #other-images img {
+      object-fit: cover;
+      width: 100%; }
 
 #main-divider {
   width: 90%;

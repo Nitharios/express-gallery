@@ -25,11 +25,6 @@ div {
   // border: 1px solid black;
 }
 
-.header {
-  margin: 10px;
-  margin-bottom: 30px;
-}
-
 #navbar {
   display: flex;
   flex-flow: row nowrap;
@@ -58,6 +53,12 @@ div {
   }
 }
 
+// _ARCHITEKT brand header at the top of the homepage
+.header {
+  margin: 10px;
+  margin-bottom: 30px;
+}
+
 #page-header {
   display: flex;
   flex-flow: row nowrap;
@@ -84,7 +85,8 @@ div {
   }
 }
 
-#first-image {
+// main display image on homepage
+#masthead {
   margin: 10px;
 
   @media (min-width: $med-size) {
@@ -96,14 +98,7 @@ div {
   }
 }
 
-#wrapper {
-  max-width: $med-size;
-  display: flex;
-  margin: 0 auto;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-
+// wrapping div for gallery thumbnails
 #content {
   max-width: $med-size;
   margin: 0 auto;
@@ -118,15 +113,54 @@ div {
     margin: 7px;
 
     img {
+      object-fit: cover;
       width: 300px;
       height: 200px;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: cover;
     }
   }
 }
 
+// styling for individual image pages
+#single-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  
+  #details {
+    margin: 0;
+
+    width: 65%;
+
+    // @media (max-width: $sm-med) {
+    //   justify-content: center;
+    // }
+
+    img {
+      // image will not stretch/shrink
+      object-fit: cover;
+      max-width: 600px;
+      max-height: 400px;
+
+      @media (max-width: $med-size) {
+        width: 300px;
+        height: 200px;
+      } 
+    }
+  }
+
+  #other-images {
+    margin: 0;
+
+    width: 25%;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+      }
+  }
+}
+
+// divider line styles
 hr {
   // border-style: solid;
 }
