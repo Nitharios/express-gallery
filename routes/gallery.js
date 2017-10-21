@@ -1,15 +1,11 @@
 /* jshint esversion:6 */
 const express = require('express');
-const bcrypt = require('bcrypt');
-const passport = require('passport');
 const router = express.Router();
 
 const isAuthenticated = require('../scripts/authenticated');
 const db = require('../models');
 const Gallery = db.gallery;
 const User = db.user; 
-
-const saltRounds = 12;
 
 router.route('/')
   .get((req, res) => {
@@ -109,7 +105,6 @@ router.route('/:id')
           return res.redirect('/gallery');
         });
       });
-
   });//end delete
 
 router.route('/:id/edit')
@@ -121,7 +116,6 @@ router.route('/:id/edit')
         let details = pictureInformation.dataValues;
 
         if (req.user.id === pictureInformation.userId) {
-
           return res.render('partials/edit', details);
         
         } else {
