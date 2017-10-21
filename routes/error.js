@@ -3,8 +3,8 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-    console.log('error worked');
-    return res.render('partials/errors/general_error');
+    console.log(req.body);
+    return res.render('partials/loginReg/wrong_userpw');
   });
 
 module.exports = router;
