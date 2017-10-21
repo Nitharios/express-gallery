@@ -12,23 +12,29 @@
         <a href="/gallery/new">New Image</a>
       {{/unless}}   
     </div>
+
+    <div class="nav">
+      <a href="/gallery/{{id}}/edit">Edit Image</a>
+    </div>
   </div>
     {{!-- new image --}}
   <div class="nav-content">
     <div class="nav">
-      {{#if home}}
+      {{!-- {{#if home}} --}}
       <a href="/register">Register</a>
-      {{/if}}
+      {{!-- {{/if}} --}}
     </div>
     
     <div class="nav">
-      {{#unless home}}
+      {{!-- {{#unless home}} --}}
       <a href="/logout">Logout</a>
-      {{/unless}}
+      {{!-- {{/unless}} --}}
+    </div>
 
-      {{#if home}}
+    <div class="nav">
+      {{!-- {{#if home}} --}}
         <a href="/login">Login</a>
-      {{/if}}
+      {{!-- {{/if}} --}}
     </div>
   </div>
   {{#if home}}
