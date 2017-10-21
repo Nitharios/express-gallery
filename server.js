@@ -44,7 +44,7 @@ app.use(passport.session());
 
 /*ROUTES*/
 app.get('/', (req, res) => {
-  return res.render('index', { home : true });
+  return res.redirect('/gallery');
 });
 
 app.use('/login', login);
