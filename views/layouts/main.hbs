@@ -6,21 +6,7 @@
 </head>
 <body>
 
-  <div id="nav">
-    {{#unless home}}
-
-      <form action="" method="GET">
-        <!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->
-        <input type="submit" formaction="/" value="Home">
-      </form>
-
-      <form action="/gallery/new" method="GET">
-        <!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->
-        <input type="submit" value="New Image">
-      </form>
-
-    {{/unless}}       
-  </div>
+  {{> navigation}}
 
   <div id="content">
     {{{body}}}

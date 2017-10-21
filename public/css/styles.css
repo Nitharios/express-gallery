@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
-  color: #536878; }
+  color: #536878;
+  margin: 0; }
 
 h1 {
   color: #536878; }
@@ -12,11 +13,21 @@ img {
   margin: 10px;
   margin-bottom: 30px; }
 
+#navbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%; }
+
 #page-header {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  width: 100%; }
+  width: 100%;
+  margin-top: 30px; }
   #page-header #brand {
     max-width: 600px;
     font-size: 25px;
@@ -30,8 +41,13 @@ img {
       #page-header #brand-description {
         display: none; } }
 
-#first-image img {
-  max-width: 100%; }
+#first-image {
+  margin: 10px; }
+  @media (min-width: 960px) {
+    #first-image {
+      margin: 0px; } }
+  #first-image img {
+    max-width: 100%; }
 
 #wrapper {
   max-width: 960px;

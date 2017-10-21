@@ -13,7 +13,7 @@ $lg-size: 1080px;
 body {
   font-family: sans-serif;
   color: $primary-color;
-  // background-color: green;
+  margin: 0;
 }
 
 h1 {
@@ -33,11 +33,25 @@ img {
   margin-bottom: 30px;
 }
 
+#navbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  // background-color: $primary-color;
+  
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
 #page-header {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
   width: 100%;
+
+  margin-top: 30px;
 
   #brand {
     max-width: $sm-med;
@@ -58,6 +72,12 @@ img {
 }
 
 #first-image {
+  margin: 10px;
+
+  @media (min-width: $med-size) {
+    margin: 0px;
+  }
+
   img {
     max-width: 100%;
   }
