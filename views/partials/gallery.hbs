@@ -1,14 +1,12 @@
 <title>All Images</title>
-<h1>Express Gallery</h1>
 
-<div>
+{{> first-image}}
+
+<p><hr id="main-divider">
 
 {{#each galleryInformation}}
-  <div>
-    <img src="{{link}}" alt =""> 
+  <div class="information">
+    <a href="/gallery/{{id}}"><img src="{{link}}" alt =""></a> 
     <p />{{user.username}}
-    <p />{{description}}
   </div>
 {{/each}}
-
-</div>

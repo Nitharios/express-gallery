@@ -6,14 +6,27 @@
 </head>
 <body>
 
-  {{#unless home}}
-    <form action="" method="get">
-      <!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->
-      <input type="submit" formaction="/" value="Home">
-    </form>
-  {{/unless}}
+  <div id="wrapper">
+    {{#unless home}}
 
-  <p/>
-  {{{body}}}
+      <form action="" method="get">
+        <!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->
+        <input type="submit" formaction="/" value="Home">
+      </form>
+
+      <form action="/new" method="get">
+        <!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->
+        <input type="submit" value="New Image">
+      </form>
+
+      {{> masthead}}
+
+    {{/unless}}    
+
+    <div id="content">
+      {{{body}}}
+    </div>
+  </div>
+
 </body>
 </html>
