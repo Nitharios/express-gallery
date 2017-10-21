@@ -1,4 +1,5 @@
 /* jshint esversion:6 */
+// handles the login route including authentication and errors
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();

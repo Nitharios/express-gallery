@@ -23,7 +23,6 @@ router.route('/')
     });
   })
   .post(isAuthenticated, (req, res) => {
-    /*{user: string, link: string, description: string}*/
     const user = req.body.user;
     const description = req.body.description;
     const pattern = new RegExp('^(http|https)://');

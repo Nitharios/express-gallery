@@ -10,12 +10,13 @@ const saltRounds = 12;
 
 router.route('/')
   .get((req, res) => {
-  return res.render('partials/register');
-})
+    return res.render('partials/register');
+  })
   .post((req, res) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {
       bcrypt.hash(req.body.password, salt, (err, hash) => {
         let username = req.body.username;
+        
         db.user.create({
           username : username,
           password : hash

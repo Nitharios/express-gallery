@@ -1,15 +1,16 @@
 /* jshint esversion:6 */
 const express = require('express');
-const router = express.Router();
-
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
-const saltRounds = 12;
 
 const db = require('../models');
 const User = db.user;
+
+const router = express.Router();
+
+const saltRounds = 12;
 
 /*ROUTES*/
 router.route('/login')
