@@ -1,33 +1,39 @@
 <div id="navbar">
-  <div>
   {{!-- home --}}
-    {{#unless home}}
-      <form action="/" method="GET">
-        <!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->
-        <input type="submit" value="Home">
-      </form>
+  <div class="nav-content">
+    <div class="nav">    
+      {{#unless home}}
+        <a href="/">Home</a>
+      {{/unless}}
+    </div>
 
-    {{!-- new image --}}
-      <form action="/gallery/new" method="GET">
-        <!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->
-        <input type="submit" value="New Image">
-      </form>
-    {{/unless}}   
+    <div class="nav">
+      {{#unless home}}    
+        <a href="/gallery/new">New Image</a>
+      {{/unless}}   
+    </div>
   </div>
+    {{!-- new image --}}
+  <div class="nav-content">
+    <div class="nav">
+      {{#unless home}}
+      <a href="/logout">Logout</a>
+      {{/unless}}
 
-  <div>
+      {{#if home}}
+        <a href="/login">Login</a>
+      {{/if}}
+    </div>
+  </div>
+  {{#if home}}
+    <div>
   {{!-- login --}}
   {{!-- should be: IF NOT LOGGED IN --}}
-    {{#if home}}
-      <form action="/login" method="GET">
-        <input type="submit" value="Login">
-      </form>
-    {{/if}}
   {{!-- logout --}}
   {{!-- should be: IF LOGGED IN --}}
-    <form action="/logout" method="GET">
-      <input type="submit" value="Logout">
-    </form>
-  {{!-- optional: user account --}}
-  </div>  
+  {{!-- optional: user account --}} 
+    </div>
+  {{/if}}
 </div>
+
+<!-- <input type="submit" formaction="javascript:history.go(-1)" value="Back"> -->

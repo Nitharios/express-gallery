@@ -1,4 +1,5 @@
 body {
+  background-color: #FEFEFA;
   font-family: sans-serif;
   color: #536878;
   margin: 0; }
@@ -12,12 +13,22 @@ h1 {
 
 #navbar {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  background-color: #FEFEFA;
   position: fixed;
-  left: 0;
-  top: 0;
   width: 100%; }
+  #navbar .nav-content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin: 5px;
+    width: 100%; }
+    #navbar .nav-content .nav {
+      margin: 10px; }
+      #navbar .nav-content .nav a {
+        color: #536878;
+        text-decoration: none; }
 
 #page-header {
   display: flex;
