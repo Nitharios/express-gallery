@@ -19,11 +19,7 @@ router.route('/login')
   .post('/login', passport.authenticate('local', {
     successRedirect : '/secret',
     failureRedirect : '/'
-  }), () => {
-    console.log('test');
-    }
-
-  );//end post
+  }));//end post
 
 router.route('/logout')
   .post((req, res) => {

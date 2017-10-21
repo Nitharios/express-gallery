@@ -24,6 +24,7 @@ router.route('/')
       }]
     })
       .then(galleryInformation => {
+        console.log('t');
         return res.render('partials/gallery', { galleryInformation });
     });
   })
