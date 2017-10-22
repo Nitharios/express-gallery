@@ -6,7 +6,6 @@ const session = require('express-session');
 
 const db = require('../models');
 const User = db.user;
-
 const router = express.Router();
 
 const saltRounds = 12;

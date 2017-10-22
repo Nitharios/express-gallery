@@ -15,7 +15,6 @@ router.route('/')
       }]
     })
     .then(galleryInformation => {
-      console.log('ROLE', req);
       return res.render('partials/gallery', { galleryInformation });
     })
     .catch(err => {
@@ -41,7 +40,7 @@ router.route('/')
       userId : req.user.id
     })
     .then(newPicture => {
-      console.log('POSTED', newPicture);
+      console.log('POSTED');
       return res.redirect(`/gallery/${newPicture.dataValues.id}`);
     })
     .catch(err => {
@@ -66,7 +65,6 @@ router.route('/:id')
         }]
       }, { raw : true })
     .then(userInformation => {
-      // console.log(userInformation);
       let data = userInformation.dataValues;
       let gallery = data.galleries.filter((element) => {
         return element.dataValues.id !== Number(id);
@@ -75,11 +73,11 @@ router.route('/:id')
       let locals = {
         userId : userInformation.id,
         username : userInformation.username,
+        id : id,
         link : pictureInformation.link,
         description : pictureInformation.description,
         gallery : gallery
       };
-        // console.log(locals.gallery);
         return res.render('partials/gallery_single', locals);
       });
     })
@@ -90,7 +88,6 @@ router.route('/:id')
   .put(isAuthenticated, (req, res) => {
     const id = req.params.id;
     const data = req.body; 
-
     let pattern = new RegExp('^(http|https)://');
     let link;
 
