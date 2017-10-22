@@ -115,14 +115,19 @@ h1 {
           height: 200px; } }
 
 .user-entry {
+  flex-shrink: 1;
   text-align: center;
-  margin-top: 50px; }
+  margin-top: 50px;
+  width: 100%; }
   .user-entry input, .user-entry textarea {
     margin: 30px auto;
     display: block;
     width: 200px;
     height: 25px;
     font-size: 20px; }
+  .user-entry img {
+    width: 90%;
+    margin: 10px; }
 
 /* dividers and spacers */
 #main-divider {
@@ -141,5 +146,3 @@ h1 {
 .spacer {
   width: 100%;
   height: 80px; }
-
-/* For New Image Form */

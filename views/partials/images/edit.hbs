@@ -1,7 +1,6 @@
 <title>Edit Image</title>
 
-
-<div>
+<div class="user-entry">
   <h1>Edit Image Information</h1>
   <h2>Image By: {{user.username}}</h2>
 
@@ -9,11 +8,9 @@
 
   <form action="/gallery/{{id}}?_method=PUT" method="post">
     <!-- <p>Author : </p><input type="text" name="author" value="{{userId}}"> -->
-    <p>Link : </p><input type="text" name="link" value="{{link}}">
-    <p>Description : </p><textarea name="description">{{description}}
-    </textarea>
-    <p>
+    <input type="text" name="link" value="{{link}}">
+    <textarea name="description">{{description}}</textarea>
     <input type="submit" value="EDIT">
-    <input type="submit" value = "DELETE" formaction="/gallery/{{id}}?_method=DELETE" method="post">
+    <input type="submit" value ="DELETE" formaction="/gallery/{{id}}?_method=DELETE" method="post">
   </form>
 </div>
