@@ -114,6 +114,17 @@ h1 {
           width: 300px;
           height: 200px; } }
 
+.user-entry {
+  text-align: center;
+  margin-top: 50px; }
+  .user-entry input, .user-entry textarea {
+    margin: 30px auto;
+    display: block;
+    width: 200px;
+    height: 25px;
+    font-size: 20px; }
+
+/* dividers and spacers */
 #main-divider {
   width: 90%;
   color: #BFC1C2;

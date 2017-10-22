@@ -1,13 +1,13 @@
 <title>New Image</title>
 
-<div>
+<div class="user-entry">
   <h1 class="topHeader">Enter Image Information</h1>
   <br>
 
   <form id="newform" action="/gallery" method="POST">
-    <p>Link : </p><input type="text" name="link">
-    <p>Description : </p><textarea name="description"></textarea>
-    <br><br>
+    <input type="text" name="title" placeholder="title">
+    <input type="text" name="link" placeholder="http://">
+    <textarea name="description" placeholder="description"></textarea>
     <input type="submit" name="Submit">
   </form>
 </div>

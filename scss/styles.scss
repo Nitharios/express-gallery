@@ -181,7 +181,21 @@ div {
   }
 }
 
-// divider line styles
+.user-entry {
+  text-align: center;
+  margin-top: 50px;
+
+
+  input, textarea {
+    margin: 30px auto;
+    display: block;
+    width: 200px;
+    height: 25px;
+    font-size: 20px;
+  }
+}
+
+/* dividers and spacers */
 hr {
   // border-style: solid;
 }
