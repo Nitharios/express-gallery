@@ -35,7 +35,6 @@ passport.use(new LocalStrategy(function(username, password, done) {
       else {
         bcrypt.compare(password, user.password)
           .then(res => {
-            console.log(res);
             // res 'basically' tells you TRUE or FALSE
             if (res) { return done(null, user); }
             else {

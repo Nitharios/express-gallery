@@ -48,9 +48,11 @@ app.get('/', (req, res) => {
 app.use('/user', user);
 app.use('/gallery', gallery);
 app.use('/error', error);
-app.use(function (req, res, next) {
-  res.status(404).send("Sorry can't find that!")
-})
+
+app.use((req, res, next) => {
+  // console.log(req);
+  res.status(404).render('partials/error');
+});
 
 app.listen(PORT, () => {
   db.sequelize.sync({ force: false });
