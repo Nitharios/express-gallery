@@ -93,8 +93,7 @@ router.route('/:id')
           link : data.link, 
           description : data.description 
         }, { 
-          
-          where : { id: id } 
+            where : { id : id } 
           })
           .then(data => {
             // data will return id of image
@@ -126,10 +125,12 @@ router.route('/:id')
 router.route('/:id/edit')
   .get(isAuthenticated, (req, res) => {
     const id = req.params.id;
+    // console.log("OVER HERE", req.user);
 
     return Gallery.findById(id)
       .then(pictureInformation => {
         let details = pictureInformation.dataValues;
+        details.username = req.user.username;
 
         if (req.user.id === pictureInformation.userId || req.user.role === 'admin') {
           return res.render('partials/images/edit', details);
