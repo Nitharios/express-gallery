@@ -57,58 +57,35 @@ router.route('/new')
 router.route('/:id')
   .get((req, res) => {
   const id = req.params.id;
-  console.log("OVER HERE", req.user);
 
-  return Gallery.findById(id)
+  return Gallery.findById(id, { raw : true })
     .then(pictureInformation => {
-      return User.findById(pictureInformation.userId);
-    })
+      return User.findById(pictureInformation.userId, {
+        include : [{
+          model : Gallery
+        }]
+      }, { raw : true })
     .then(userInformation => {
+      // console.log(userInformation);
+      let data = userInformation.dataValues;
+      let gallery = data.galleries.filter((element) => {
+        return element.dataValues.id !== Number(id);
+      });
+
       let locals = {
-        
+        userId : userInformation.id,
+        username : userInformation.username,
+        link : pictureInformation.link,
+        description : pictureInformation.description,
+        gallery : gallery
       };
+        // console.log(locals.gallery);
+        return res.render('partials/gallery_single', locals);
+      });
     })
-
-  // return Gallery.findById(id, {
-  //   include : [{
-  //     model : User
-  //   }]
-  // })
-  //   .then(pictureInformation => {
-  //     let details = pictureInformation.dataValues;
-  //     let userName = details.user.dataValues.username;
-
-  //     return res.render('partials/gallery_single', details);
-  //   })
     .catch(err => {
       return res.redirect('/error');
     });
-
-/*
-router.get('/:id', (req, res) => {
-  const galleryId = req.params.id;
-  return Gallery.findById(galleryId)
-  .then((singlePhoto) => {
-    return user.findById(singlePhoto.userId)
-    .then((theUser) => {
-      return Gallery.findAll()
-      .then((entireGallery) => {
-        let collection = entireGallery.slice(0, 3);
-        let locals = {
-          id: galleryId,
-          user: theUser.username,
-          title: singlePhoto.dataValues.title,
-          link: singlePhoto.dataValues.link,
-          description: singlePhoto.dataValues.description,
-          collection: collection
-        }
-        return res.render('partials/gallery_single', locals);
-      });
-    });
-  });
-});
-*/
-
   })
   .put(isAuthenticated, (req, res) => {
     const id = req.params.id;
