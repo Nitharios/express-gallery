@@ -127,21 +127,24 @@ router.route('/:id/edit')
     const id = req.params.id;
     // console.log("OVER HERE", req.user);
 
-    return Gallery.findById(id)
-      .then(pictureInformation => {
-        let details = pictureInformation.dataValues;
-        details.username = req.user.username;
+    return Gallery.findById(id, {
+      include : [{
+        model : User
+      }]
+    })
+    .then(pictureInformation => {
+      let details = pictureInformation.dataValues;
 
-        if (req.user.id === pictureInformation.userId || req.user.role === 'admin') {
-          return res.render('partials/images/edit', details);
-        
-        } else {
-          return res.redirect('/gallery');
-        }      
-      })
-      .catch(err => {
-        return res.redirect('/error');
-      });
+      if (req.user.id === pictureInformation.userId || req.user.role === 'admin') {
+        return res.render('partials/images/edit', details);
+      
+      } else {
+        return res.redirect('/gallery');
+      }      
+    })
+    .catch(err => {
+      return res.redirect('/error');
+    });
   });
 
 module.exports = router;
