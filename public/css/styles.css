@@ -93,16 +93,7 @@ h1 {
         width: 80%; } }
     #single-wrapper #details img {
       object-fit: cover;
-      max-width: 600px;
-      max-height: 400px; }
-      @media (max-width: 960px) {
-        #single-wrapper #details img {
-          width: 500px;
-          height: 300px; } }
-      @media (max-width: 600px) {
-        #single-wrapper #details img {
-          width: 300px;
-          height: 200px; } }
+      width: 100%; }
   #single-wrapper #other-images {
     width: 25%;
     margin: 0;
@@ -121,7 +112,7 @@ h1 {
 
 .user-entry {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center; }
   .user-entry input, .user-entry textarea {
     width: 200px;

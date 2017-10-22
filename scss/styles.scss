@@ -59,7 +59,6 @@ div {
 }
 
 // _ARCHITEKT brand header at the top of the homepage
-
 #page-header {
   @include flex-settings(flex, row nowrap, space-around);
   width: 100%;
@@ -145,18 +144,8 @@ div {
     }
 
     img {
-      // image will not stretch/shrink
       object-fit: cover;
-      max-width: 600px;
-      max-height: 400px;
-
-      @media (max-width: $med-size) {
-        @include width-height(500px, 300px);
-      } 
-
-      @media (max-width: $sm-med) {
-        @include width-height(300px, 200px);
-      } 
+      width: 100%;
     }
   }
 
@@ -182,12 +171,11 @@ div {
 
 .user-entry {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center;
 
   input, textarea {
     @include width-height(200px, 25px);
-
     display: block;
     margin: 30px auto;
     font-size: 20px;
@@ -200,10 +188,6 @@ div {
 }
 
 /* dividers and spacers */
-hr {
-  // border-style: solid;
-}
-
 #main-divider {
   width: 90%;
   margin-top: 15px;
