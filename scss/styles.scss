@@ -10,11 +10,22 @@ $sm-med: 600px;
 $med-size: 960px;
 $lg-size: 1080px;
 
+@mixin flex-settings($display, $flow, $justify) {
+  display: $display;
+  flex-flow: $flow;
+  justify-content: $justify;
+}
+
+@mixin width-height($width, $height) {
+  width: $width;
+  height: $height;
+}
+
 body {
   background-color: $accent-color;
   font-family: sans-serif;
   color: $primary-color;
-  margin: 0;
+  margin: 0 auto;
 }
 
 h1 {
@@ -26,23 +37,17 @@ div {
 }
 
 #navbar {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  
+  @include flex-settings(flex, row nowrap, space-around);
   background-color: $accent-color;
   position: fixed;
   width: 100%;
 
   .nav-content {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    margin: 5px;
+    @include flex-settings(flex, row nowrap, center);
     width: 100%;
+    margin: 5px;
 
     .nav {
-
       margin: 10px;
 
       a {
@@ -54,32 +59,37 @@ div {
 }
 
 // _ARCHITEKT brand header at the top of the homepage
-.header {
-  margin: 10px;
-  margin-bottom: 30px;
-}
 
 #page-header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
+  @include flex-settings(flex, row nowrap, space-around);
   width: 100%;
-
-  margin-top: 50px;
+  
+  @media (min-width: $med-size) {
+    border-top: 1px solid $secondary-color;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .header {
+    margin: 20px;
+  }
 
   #brand {
     max-width: $sm-med;
-    font-size: 25px;
-    line-height: 23px;
-    text-align: left;
-    align-self: flex-start;
+    font-size: 45px;
+    line-height: 25px;
+
+    @media (max-width: $sm-med) {
+      font-size: 25px;
+    }
   }
 
   #brand-description {
-    max-width: 350px;
-    margin: 1px solid black;
+    border-left: 1px solid $secondary-color;
+    padding: 0px 0px 0px 20px;
+    max-width: 300px;
 
-    @media (max-width: $sm-med) {
+    @media (max-width: $med-size) {
       display: none;
     }
   }
@@ -100,32 +110,24 @@ div {
 
 // wrapping div for gallery thumbnails
 #content {
+  @include flex-settings(flex, row wrap, center);
   max-width: $med-size;
   margin: 0 auto;
-
   padding-top: 50px;
-
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
 
   .information {
     margin: 7px;
 
     img {
+      @include width-height(300px, 200px);
       object-fit: cover;
-      width: 300px;
-      height: 200px;
     }
   }
 }
 
 // styling for individual image pages
 #single-wrapper {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  
+  @include flex-settings(flex, row wrap, space-between);
   margin: 10px;
   width: 100%;
 
@@ -149,20 +151,18 @@ div {
       max-height: 400px;
 
       @media (max-width: $med-size) {
-        width: 500px;
-        height: 300px;
+        @include width-height(500px, 300px);
       } 
 
       @media (max-width: $sm-med) {
-        width: 300px;
-        height: 200px;
+        @include width-height(300px, 200px);
       } 
     }
   }
 
   #other-images {
-    margin: 0;
     width: 25%;
+    margin: 0;
     text-align: center;
 
     @media (max-width: $med-size) {
@@ -170,28 +170,26 @@ div {
     }
 
     img {
+      @include width-height(100%, 150px);
       object-fit: cover;
-      width: 100%;
 
       @media (max-width: $med-size) {
-        width: 300px;
-        height: 200px;
+        @include width-height(300px, 200px);
       }
     }
   }
 }
 
 .user-entry {
-  flex-shrink: 1;
-  text-align: center;
-  margin-top: 50px;
   width: 100%;
+  margin-top: 50px;
+  text-align: center;
 
   input, textarea {
-    margin: 30px auto;
+    @include width-height(200px, 25px);
+
     display: block;
-    width: 200px;
-    height: 25px;
+    margin: 30px auto;
     font-size: 20px;
   }
 
@@ -208,10 +206,9 @@ hr {
 
 #main-divider {
   width: 90%;
-  color: $secondary-color;
   margin-top: 15px;
   margin-bottom: 10px;
-  // border: none;
+  color: $secondary-color;
 
   @media (min-width: $med-size) {
     width: 100%;
@@ -225,6 +222,5 @@ hr {
 
 // spacers
 .spacer {
-  width: 100%;
-  height: 80px;
+  @include width-height(100%, 80px);
 }
