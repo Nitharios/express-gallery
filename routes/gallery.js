@@ -14,9 +14,12 @@ router.route('/')
         model : User
       }]
     })
-      .then(galleryInformation => {
-        console.log('ROLE', req);
-        return res.render('partials/gallery', { galleryInformation });
+    .then(galleryInformation => {
+      console.log('ROLE', req);
+      return res.render('partials/gallery', { galleryInformation });
+    })
+    .catch(err => {
+      return res.redirect('/error');
     });
   })
   .post(isAuthenticated, (req, res) => {
@@ -37,15 +40,18 @@ router.route('/')
       description : description,
       userId : req.user.id
     })
-      .then(newPicture => {
-        console.log('POSTED', newPicture);
-        return res.redirect(`/gallery/${newPicture.dataValues.id}`);
-      });
+    .then(newPicture => {
+      console.log('POSTED', newPicture);
+      return res.redirect(`/gallery/${newPicture.dataValues.id}`);
+    })
+    .catch(err => {
+      return res.redirect('/error');
+    });
   });
 
 router.route('/new')
   .get(isAuthenticated, (req, res) => {
-    return res.render('partials/new');
+    return res.render('partials/images/new');
   });
 
 router.route('/:id')
@@ -62,6 +68,9 @@ router.route('/:id')
       let userName = details.user.dataValues.username;
 
       return res.render('partials/gallery_single', details);
+    })
+    .catch(err => {
+      return res.redirect('/error');
     });
   })
   .put(isAuthenticated, (req, res) => {
@@ -91,6 +100,9 @@ router.route('/:id')
             // data will return id of image
             return res.redirect('/gallery');
           });
+      })
+      .catch(err => {
+        return res.redirect('/error');
       });
   })
   .delete(isAuthenticated, (req, res) => {
@@ -105,6 +117,9 @@ router.route('/:id')
           console.log('DELETED');
           return res.redirect('/gallery');
         });
+      })
+      .catch(err => {
+        return res.redirect('/error');
       });
   });//end delete
 
@@ -117,11 +132,14 @@ router.route('/:id/edit')
         let details = pictureInformation.dataValues;
 
         if (req.user.id === pictureInformation.userId || req.user.role === 'admin') {
-          return res.render('partials/edit', details);
+          return res.render('partials/images/edit', details);
         
         } else {
           return res.redirect('/gallery');
         }      
+      })
+      .catch(err => {
+        return res.redirect('/error');
       });
   });
 

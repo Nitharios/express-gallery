@@ -14,7 +14,7 @@ const saltRounds = 12;
 /*ROUTES*/
 router.route('/login')
   .get((req, res) => {
-    return res.render('partials/login');
+    return res.render('partials/user/login');
   })
   .post(passport.authenticate('local', {
     successRedirect : '/gallery',
@@ -30,7 +30,7 @@ router.route('/logout')
 
 router.route('/register')
   .get((req, res) => {
-    return res.render('partials/register');
+    return res.render('partials/user/register');
   })
   .post((req, res) => {
     bcrypt.genSalt(saltRounds, (err, salt) => {
@@ -42,10 +42,10 @@ router.route('/register')
           password : hash
         })
         .then(user => {
-          return res.redirect('/');
+          return res.redirect('/gallery');
         })
         .catch(err => { 
-          return res.render('partials/loginReg/user_already_exists');
+          return res.redirect('/error');
         });
       });
     });

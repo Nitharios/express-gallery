@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-    return res.render('partials/loginReg/wrong_userpw');
+    return res.render('partials/error/404');
   });
 
 module.exports = router;
