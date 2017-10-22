@@ -57,21 +57,58 @@ router.route('/new')
 router.route('/:id')
   .get((req, res) => {
   const id = req.params.id;
+  console.log("OVER HERE", req.user);
 
-  return Gallery.findById(id, {
-    include : [{
-      model : User
-    }]
-  })
+  return Gallery.findById(id)
     .then(pictureInformation => {
-      let details = pictureInformation.dataValues;
-      let userName = details.user.dataValues.username;
-
-      return res.render('partials/gallery_single', details);
+      return User.findById(pictureInformation.userId);
     })
+    .then(userInformation => {
+      let locals = {
+        
+      };
+    })
+
+  // return Gallery.findById(id, {
+  //   include : [{
+  //     model : User
+  //   }]
+  // })
+  //   .then(pictureInformation => {
+  //     let details = pictureInformation.dataValues;
+  //     let userName = details.user.dataValues.username;
+
+  //     return res.render('partials/gallery_single', details);
+  //   })
     .catch(err => {
       return res.redirect('/error');
     });
+
+/*
+router.get('/:id', (req, res) => {
+  const galleryId = req.params.id;
+  return Gallery.findById(galleryId)
+  .then((singlePhoto) => {
+    return user.findById(singlePhoto.userId)
+    .then((theUser) => {
+      return Gallery.findAll()
+      .then((entireGallery) => {
+        let collection = entireGallery.slice(0, 3);
+        let locals = {
+          id: galleryId,
+          user: theUser.username,
+          title: singlePhoto.dataValues.title,
+          link: singlePhoto.dataValues.link,
+          description: singlePhoto.dataValues.description,
+          collection: collection
+        }
+        return res.render('partials/gallery_single', locals);
+      });
+    });
+  });
+});
+*/
+
   })
   .put(isAuthenticated, (req, res) => {
     const id = req.params.id;
@@ -120,12 +157,11 @@ router.route('/:id')
       .catch(err => {
         return res.redirect('/error');
       });
-  });//end delete
+  });
 
 router.route('/:id/edit')
   .get(isAuthenticated, (req, res) => {
     const id = req.params.id;
-    // console.log("OVER HERE", req.user);
 
     return Gallery.findById(id, {
       include : [{
