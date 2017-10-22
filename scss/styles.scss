@@ -7,7 +7,7 @@ $accent-color: #FEFEFA;
 //breakpoints
 $sm-size: 400px;
 $sm-med: 600px;
-$med-size: 960px;
+$med-lg: 960px;
 $lg-size: 1080px;
 
 @mixin flex-settings($display, $flow, $justify) {
@@ -22,10 +22,10 @@ $lg-size: 1080px;
 }
 
 body {
-  background-color: $accent-color;
-  font-family: sans-serif;
-  color: $primary-color;
   margin: 0 auto;
+  background-color: $accent-color;
+  color: $primary-color;
+  font-family: sans-serif;
 }
 
 h1 {
@@ -38,9 +38,9 @@ div {
 
 #navbar {
   @include flex-settings(flex, row nowrap, space-around);
-  background-color: $accent-color;
-  position: fixed;
   width: 100%;
+  position: fixed;
+  background-color: $accent-color;
 
   .nav-content {
     @include flex-settings(flex, row nowrap, center);
@@ -63,10 +63,9 @@ div {
   @include flex-settings(flex, row nowrap, space-around);
   width: 100%;
   
-  @media (min-width: $med-size) {
+  @media (min-width: $med-lg) {
     border-top: 1px solid $secondary-color;
     margin-top: 20px;
-    margin-bottom: 10px;
   }
   
   .header {
@@ -75,7 +74,7 @@ div {
 
   #brand {
     max-width: $sm-med;
-    font-size: 45px;
+    font-size: 40px;
     line-height: 25px;
 
     @media (max-width: $sm-med) {
@@ -88,7 +87,7 @@ div {
     padding: 0px 0px 0px 20px;
     max-width: 300px;
 
-    @media (max-width: $med-size) {
+    @media (max-width: $med-lg) {
       display: none;
     }
   }
@@ -98,7 +97,7 @@ div {
 #masthead {
   margin: 10px;
 
-  @media (min-width: $med-size) {
+  @media (min-width: $med-lg) {
     margin: 0px;
   }
 
@@ -110,7 +109,7 @@ div {
 // wrapping div for gallery thumbnails
 #content {
   @include flex-settings(flex, row wrap, center);
-  max-width: $med-size;
+  max-width: $med-lg;
   margin: 0 auto;
   padding-top: 50px;
 
@@ -130,7 +129,7 @@ div {
   margin: 10px;
   width: 100%;
 
-  @media (max-width: $med-size) {
+  @media (max-width: $med-lg) {
     justify-content: center;
   }
 
@@ -138,7 +137,7 @@ div {
     margin: 0;
     width: 65%;
 
-    @media (max-width: $med-size) {
+    @media (max-width: $med-lg) {
       text-align: center;
       width: 80%;
     }
@@ -154,7 +153,7 @@ div {
     margin: 0;
     text-align: center;
 
-    @media (max-width: $med-size) {
+    @media (max-width: $med-lg) {
       width: 100%;
     }
 
@@ -162,7 +161,7 @@ div {
       @include width-height(100%, 150px);
       object-fit: cover;
 
-      @media (max-width: $med-size) {
+      @media (max-width: $med-lg) {
         @include width-height(300px, 200px);
       }
     }
@@ -194,7 +193,7 @@ div {
   margin-bottom: 10px;
   color: $secondary-color;
 
-  @media (min-width: $med-size) {
+  @media (min-width: $med-lg) {
     width: 100%;
   }
 }
