@@ -8,9 +8,7 @@ const session = require('express-session');
 const redis = require('connect-redis')(session); 
 
 const authenticatePassport = require('./scripts/auth-pass');
-const login = require('./routes/login');
-const logout = require('./routes/logout');
-const register = require('./routes/register');
+const user = require('./routes/user');
 const gallery = require('./routes/gallery');
 const error = require('./routes/error');
 // const isAuthenticated = require('./scripts/authenticated');
@@ -47,11 +45,12 @@ app.get('/', (req, res) => {
   return res.redirect('/gallery');
 });
 
-app.use('/login', login);
-app.use('/logout', logout);
-app.use('/register', register);
+app.use('/user', user);
 app.use('/gallery', gallery);
 app.use('/error', error);
+app.use(function (req, res, next) {
+  res.status(404).send("Sorry can't find that!")
+})
 
 app.listen(PORT, () => {
   db.sequelize.sync({ force: false });
