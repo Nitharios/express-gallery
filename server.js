@@ -23,7 +23,7 @@ app.engine('hbs', handlebars({
   defaultLayout : 'main', 
   extname: '.hbs' 
 }));
-
+// app.set('views', './public/views');
 app.set('view engine', 'hbs');
 
 app.use(bodyParser.urlencoded({ extended : true }));
