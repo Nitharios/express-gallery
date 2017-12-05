@@ -1,0 +1,41 @@
+{
+  "name": "express-gallery",
+  "version": "1.0.0",
+  "description": "Express Gallery ===============",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "connect-redis": "^3.3.2",
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "method-override": "^2.3.10",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.26.0",
+    "sequelize-cli": "^3.2.0"
+  },
+  "devDependencies": {
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitharios/express-gallery.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nitharios/express-gallery/issues"
+  },
+  "homepage": "https://github.com/Nitharios/express-gallery#readme"
+}
