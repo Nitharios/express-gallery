@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/Nitharios/express-gallery/issues"
   },
-  "homepage": "https://github.com/Nitharios/express-gallery#readme"
+  "homepage": "https://github.com/Nitharios/express-gallery#readme",
+  "directories": {
+    "lib": "lib"
+  }
 }

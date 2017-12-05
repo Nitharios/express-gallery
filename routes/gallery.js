@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const isAuthenticated = require('../scripts/authenticated');
+const isAuthenticated = require('../lib/authenticated');
 const db = require('../models');
 const Gallery = db.gallery;
 const User = db.user; 

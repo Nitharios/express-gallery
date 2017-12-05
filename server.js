@@ -5,9 +5,10 @@ const handlebars = require('express-handlebars');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const session = require('express-session');
-const redis = require('connect-redis')(session); 
+const redis = require('connect-redis')(session);
+const path = require('path');
 
-const authenticatePassport = require('./scripts/auth-pass');
+const authenticatePassport = require('./lib/auth-pass');
 const user = require('./routes/user');
 const gallery = require('./routes/gallery');
 const error = require('./routes/error');
@@ -36,7 +37,7 @@ app.use(session({
   saveInitialized: false
 }));
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
