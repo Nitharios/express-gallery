@@ -32,6 +32,8 @@ router.route('/register')
     return res.render('partials/user/register');
   })
   .post((req, res) => {
+    console.log('register');
+    
     bcrypt.genSalt(saltRounds, (err, salt) => {
       bcrypt.hash(req.body.password, salt, (err, hash) => {
         let username = req.body.username;
