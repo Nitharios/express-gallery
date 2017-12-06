@@ -1,5 +1,6 @@
 node_modules/
 config/config.json
+lib/setup.sql
 
 # Logs
 logs
